@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu creatie</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="menuContainer"></div>
+  <script>
+    fetch('links.json')
+        .then(response => response.json())
+        .then(data => createMenu(data));
+
+    function createMenu(menuItems) {
+        var ul = document.createElement('ul');
+        for (var i = 0; i < menuItems.length; i++) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.textContent = menuItems[i].title;
+            a.href = menuItems[i].url;
+            li.appendChild(a);
+            ul.appendChild(li);
+        }
+        document.getElementById('menuContainer').appendChild(ul);
+    }
+  </script>
+
+</body>
+</html>
